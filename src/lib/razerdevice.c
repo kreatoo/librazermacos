@@ -135,6 +135,7 @@ bool is_mouse(IOUSBDeviceInterface **usb_dev)
 	case USB_DEVICE_ID_RAZER_DEATHADDER_V2:
 	case USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRED:
   case USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRELESS:
+  case USB_DEVICE_ID_RAZER_DEATHADDER_V3_PRO_WIRED:
   case USB_DEVICE_ID_RAZER_DEATHADDER_V3_PRO_WIRELESS:
 	case USB_DEVICE_ID_RAZER_DEATHADDER_V2_MINI:
 	case USB_DEVICE_ID_RAZER_NAGA_LEFT_HANDED_2020:
@@ -385,7 +386,7 @@ void closeRazerUSBDeviceInterface(IOUSBDeviceInterface **dev)
 	kr = (*dev)->Release(dev);
 }
 
-RazerDevices getAllRazerDevices()
+RazerDevices getAllRazerDevices(void)
 {
     RazerDevices allDevices = { .devices = NULL, .size = 0 };
 

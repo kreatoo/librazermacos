@@ -70,6 +70,7 @@
 #define USB_DEVICE_ID_RAZER_VIPER_ULTIMATE_WIRELESS 0x007B
 #define USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRED 0x007C
 #define USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRELESS 0x007D
+#define USB_DEVICE_ID_RAZER_DEATHADDER_V3_PRO_WIRED 0x00b6
 #define USB_DEVICE_ID_RAZER_DEATHADDER_V3_PRO_WIRELESS 0x00b7
 #define USB_DEVICE_ID_RAZER_DEATHADDER_V2 0x0084
 #define USB_DEVICE_ID_RAZER_DEATHADDER_V2_MINI 0x008C
@@ -188,6 +189,7 @@ ssize_t razer_attr_write_right_mode_reactive(IOUSBDeviceInterface **usb_dev, con
 
 ushort razer_attr_read_dpi(IOUSBDeviceInterface **usb_dev);
 void razer_attr_write_dpi(IOUSBDeviceInterface **usb_dev, ushort dpi_x, ushort dpi_y);
+void razer_attr_write_dpi_stage(IOUSBDeviceInterface **usb_dev, unsigned char stage, ushort dpi_x, ushort dpi_y);
 
 // Poll
 ushort razer_attr_read_poll_rate(IOUSBDeviceInterface **usb_dev);
@@ -216,5 +218,9 @@ ssize_t razer_attr_write_logo_led_rgb(IOUSBDeviceInterface **usb_dev, const char
 
 ssize_t razer_attr_read_get_battery(IOUSBDeviceInterface **usb_dev, char *buf);
 ssize_t razer_attr_read_is_charging(IOUSBDeviceInterface **usb_dev, char *buf);
+
+// Power management
+void razer_attr_write_idle_time(IOUSBDeviceInterface **usb_dev, unsigned short idle_time);
+void razer_attr_write_low_battery_threshold(IOUSBDeviceInterface **usb_dev, unsigned char threshold);
 
 #endif

@@ -47,7 +47,7 @@ typedef struct {
 IOUSBDeviceInterface **getRazerUSBDeviceInterface(int type);
 void closeRazerUSBDeviceInterface(IOUSBDeviceInterface **dev);
 
-RazerDevices getAllRazerDevices();
+RazerDevices getAllRazerDevices(void);
 void closeAllRazerDevices(RazerDevices devices);
 
 #endif
