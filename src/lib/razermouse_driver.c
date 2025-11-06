@@ -1783,6 +1783,33 @@ ushort razer_attr_read_dpi(IOUSBDeviceInterface **usb_dev)
     struct razer_report report, response_report;
     report = razer_chroma_misc_get_dpi_xy(0x01);
 
+    UInt16 product = -1;
+    (*usb_dev)->GetDeviceProduct(usb_dev, &product);
+
+    switch (product)
+    {
+        case USB_DEVICE_ID_RAZER_LANCEHEAD_WIRED:
+        case USB_DEVICE_ID_RAZER_LANCEHEAD_WIRELESS:
+        case USB_DEVICE_ID_RAZER_LANCEHEAD_WIRELESS_RECEIVER:
+        case USB_DEVICE_ID_RAZER_LANCEHEAD_WIRELESS_WIRED:
+        case USB_DEVICE_ID_RAZER_MAMBA_WIRELESS_RECEIVER:
+        case USB_DEVICE_ID_RAZER_MAMBA_WIRELESS_WIRED:
+        case USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRED:
+        case USB_DEVICE_ID_RAZER_DEATHADDER_V2_PRO_WIRELESS:
+        case USB_DEVICE_ID_RAZER_DEATHADDER_V3_PRO_WIRELESS:
+            report.transaction_id.id = 0x3f;
+            break;
+        case USB_DEVICE_ID_RAZER_BASILISK_ULTIMATE_RECEIVER:
+        case USB_DEVICE_ID_RAZER_BASILISK_ULTIMATE:
+        case USB_DEVICE_ID_RAZER_ATHERIS_RECEIVER:
+        case USB_DEVICE_ID_RAZER_BASILISK_V3_PRO_WIRED:
+        case USB_DEVICE_ID_RAZER_BASILISK_V3_PRO_WIRELESS:
+        case USB_DEVICE_ID_RAZER_OROCHI_V2_RECEIVER:
+        case USB_DEVICE_ID_RAZER_OROCHI_V2_BLUETOOTH:
+            report.transaction_id.id = 0x1f;
+            break;
+    }
+
     response_report = razer_send_payload(usb_dev, &report);
     ushort dpi_x = (response_report.arguments[1] << 8) | (response_report.arguments[2] & 0xFF);
     return dpi_x;
